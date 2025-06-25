@@ -1,0 +1,73 @@
+.wrapper {
+  grid-column: span 12;
+  margin-top: 32px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.titleWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+.editIcon {
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.editIcon:hover {
+  color: #0070f3;
+}
+
+.headerText {
+  padding: 0;
+}
+
+.period {
+  font-size: 14px;
+  color: #666;
+}
+
+.viewMore {
+  color: #002991;
+  text-decoration: underline;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.viewMore:hover {
+  color: #001f73;
+}
+
+.cardsContainer {
+  display: flex;
+  gap: 24px;
+}
+
+/* Desktop grid layout */
+@media (min-width: 1331px) {
+  .cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+} 

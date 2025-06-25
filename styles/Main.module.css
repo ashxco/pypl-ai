@@ -1,0 +1,154 @@
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  padding: 32px 24px;
+}
+
+/* Maintain max-width on larger screens */
+@media (min-width: 1331px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Responsive container for horizontal scrolling */
+@media (max-width: 1330px) {
+  .container {
+    padding: 0 12px; /* Reduce padding on smaller screens */
+  }
+  
+  .scrollableContainer {
+    position: relative;
+    grid-column: span 12;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  .scrollableContent {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.3s ease;
+    padding: 0; /* Fixed space for navigation arrows */
+    box-sizing: border-box;
+  }
+  
+  /* Fade effects */
+  .scrollableContainer::before,
+  .scrollableContainer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .scrollableContainer::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+  }
+  
+  .scrollableContainer::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+  }
+  
+  .scrollableContainer.canScrollLeft::before {
+    opacity: 1;
+  }
+  
+  .scrollableContainer.canScrollRight::after {
+    opacity: 1;
+  }
+  
+  /* Individual arrow visibility */
+  .scrollableContainer.canScrollLeft .navArrow.left {
+    display: flex;
+  }
+  
+  .scrollableContainer:not(.canScrollLeft) .navArrow.left {
+    display: none;
+  }
+  
+  .scrollableContainer.canScrollRight .navArrow.right {
+    display: flex;
+  }
+  
+  .scrollableContainer:not(.canScrollRight) .navArrow.right {
+    display: none;
+  }
+  
+  .navArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #ddd;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+  
+  .navArrow:hover {
+    background: #f5f7fa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .navArrow.left {
+    left: 10px;
+  }
+  
+  .navArrow.right {
+    right: 10px;
+  }
+  
+  .navArrow i {
+    font-size: 14px;
+    color: #002991;
+  }
+  
+  /* Swipe dots */
+  .swipeDots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    grid-column: span 12;
+  }
+  
+  .swipeDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c4c4c4;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .swipeDot.active {
+    background: #0061ff;
+  }
+  
+  .swipeDot:hover {
+    background: #999;
+  }
+  
+  .swipeDot.active:hover {
+    background: #0052d4;
+  }
+} 

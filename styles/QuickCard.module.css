@@ -1,0 +1,88 @@
+.card{
+  grid-column: span 3;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:24px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  min-height:140px;
+}
+.topRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+.icon{
+  font-size:24px;
+  color:#002991;
+}
+.menuContainer {
+  position: relative;
+}
+
+.menu{
+  font-size:18px;
+  color:#999;
+  cursor:pointer;
+  transition: color 0.2s ease;
+}
+
+.menu:hover {
+  color: #666;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+  min-width: 180px;
+  z-index: 100;
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 14px;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdownItem:hover {
+  background-color: #f5f7fa;
+}
+
+.dropdownItem:active {
+  background-color: #e9edf8;
+}
+.link{
+  font-weight:600;
+  color:#002991;
+  text-decoration:underline;
+  font-size:14px;
+}
+.desc{
+  font-size:14px;
+  margin:0;
+  color:#000;
+}
+
+/* Responsive styles for horizontal scrolling */
+@media (max-width: 1330px) {
+  .card {
+    grid-column: unset;
+    width: 290px;
+    flex-shrink: 0;
+  }
+} 

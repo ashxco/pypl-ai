@@ -1,0 +1,19 @@
+{
+  "name": "pypl-demo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "ag-grid-community": "^33.3.2",
+    "ag-grid-react": "^33.3.2",
+    "better-sqlite3": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "recharts": "^3.0.0"
+  }
+}

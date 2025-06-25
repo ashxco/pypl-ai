@@ -1,0 +1,247 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #F5F7FA;
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Desktop collapsed state - slide out */
+.sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+/* Mobile responsive behavior */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    z-index: 1001;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar.mobileOpen {
+    transform: translateX(0);
+  }
+  
+  /* On mobile, collapsed state is the default */
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin: 0 auto 24px;
+}
+
+.createBtn {
+  background: #000;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0 auto 32px;
+  width: fit-content;
+}
+
+.createBtn:hover {
+  background: #222;
+}
+
+.createIcon {
+  font-size: 18px;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-right: 12px;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  font-size: 14px;
+}
+
+.link:hover,
+.link[aria-current="page"] {
+  background: #d7e3ff;
+}
+
+.starredHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  font-weight: 600;
+  padding-right: 10px;
+}
+
+.folderIcon {
+  font-size: 24px;
+}
+
+.chevron {
+  font-size: 20px;
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+.starredList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.starItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  padding-left: 32px;
+}
+
+.starItem:hover {
+  background: #d7e3ff;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  margin: 16px 0;
+}
+
+.navIcon {
+  margin-right: 8px;
+  font-size: 24px;
+}
+
+.rightChevron {
+  margin-left: auto;
+  color: #999;
+  font-size: 20px;
+}
+
+.starIcon {
+  font-size: 18px;
+}
+
+.active {
+  color: #002991;
+  font-weight: 600;
+}
+.active .navIcon {
+  color: #002991;
+}
+
+.starFill {
+  display: inline-block;
+}
+.starOutline {
+  display: none;
+}
+.starItem:hover .starFill {
+  display: none;
+}
+.starItem:hover .starOutline {
+  display: inline-block;
+}
+
+.closed {
+  max-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.open {
+  max-height: 300px;
+}
+
+.starredContainer:hover {
+  background: #f0f4ff;
+  border-radius: 6px;
+}
+.starredContainer {
+  padding: 12px 12px 4px 12px;
+  border-radius: 6px;
+}
+
+/* Mobile overlay */
+.mobileOverlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileOverlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .mobileOverlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+} 
