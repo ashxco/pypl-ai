@@ -1,13 +1,31 @@
 import styles from '../styles/Header.module.css';
 import { useRouter } from 'next/router';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import NotificationPanel from './NotificationPanel';
+import UserDropdown from './UserDropdown';
 
 export default function Header({ toggleSidebar }) {
   const router = useRouter();
   const username = router.query.user || 'Business Name';
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [userData, setUserData] = useState(null);
   const bellButtonRef = useRef(null);
+  const avatarRef = useRef(null);
+
+  // Fetch user data when component mounts
+  useEffect(() => {
+    fetch('/api/login', { method: 'GET', credentials: 'include' })
+      .then(async (res) => {
+        if (res.ok) {
+          const data = await res.json();
+          setUserData({ fullName: data.fullName, email: data.email });
+        }
+      })
+      .catch(() => {
+        // Silently fail - user data will remain null
+      });
+  }, []);
 
   const handleNotificationClick = (e) => {
     e.preventDefault();
@@ -17,6 +35,16 @@ export default function Header({ toggleSidebar }) {
 
   const handleCloseNotifications = () => {
     setShowNotifications(false);
+  };
+
+  const handleUserDropdownClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowUserDropdown(prev => !prev);
+  };
+
+  const handleCloseUserDropdown = () => {
+    setShowUserDropdown(false);
   };
 
   return (
@@ -33,7 +61,7 @@ export default function Header({ toggleSidebar }) {
             <i className="ph ph-bell"></i>
             <span className={styles.notificationBadge}>4</span>
           </button>
-          <div className={styles.avatarContainer}>
+          <div className={styles.avatarContainer} ref={avatarRef} onClick={handleUserDropdownClick}>
             <img 
               src="https://i.pravatar.cc/150?img=12" 
               alt="User Avatar" 
@@ -46,6 +74,12 @@ export default function Header({ toggleSidebar }) {
         isOpen={showNotifications} 
         onClose={handleCloseNotifications}
         buttonRef={bellButtonRef}
+      />
+      <UserDropdown 
+        isOpen={showUserDropdown} 
+        onClose={handleCloseUserDropdown}
+        buttonRef={avatarRef}
+        userData={userData}
       />
     </>
   );

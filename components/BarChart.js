@@ -24,6 +24,7 @@ const BarChart = ({
   showTooltip = true,
   height = 200,
   startEndOnly = false,
+  yAxisDomain,
 }) => {
   const categoryColors = constructCategoryColors(categories, colors);
 
@@ -40,6 +41,11 @@ const BarChart = ({
   };
 
   const yAxisFormatter = (value) => {
+    // Check if this is percentage data (Auth Rate) by checking if yAxisDomain is set
+    if (yAxisDomain) {
+      return `${value}%`;
+    }
+    // Default currency formatting for other charts
     if (value >= 1000) {
       return `$${(value / 1000).toFixed(0)}k`;
     }
@@ -294,6 +300,12 @@ const BarChart = ({
 
   const getBarColor = (category) => {
     const color = categoryColors.get(category);
+    
+    // Check if color is already a hex code
+    if (color && color.startsWith('#')) {
+      return color;
+    }
+    
     const colorMap = {
       blue: '#0066F5',
       navy: '#1e40af',
@@ -345,6 +357,7 @@ const BarChart = ({
               tickLine={{ stroke: '#e5e7eb' }}
               axisLine={{ stroke: '#e5e7eb' }}
               tickFormatter={yAxisFormatter}
+              domain={yAxisDomain || ['auto', 'auto']}
             />
           )}
           {showTooltip && <Tooltip content={<CustomTooltip />} cursor={{ fill: '#f5f7fa' }} />}
@@ -352,9 +365,9 @@ const BarChart = ({
             <Bar 
               key={category}
               dataKey={category}
-              stackId="stack"
+              stackId={yAxisDomain ? undefined : "stack"}
               fill={getBarColor(category)}
-              radius={index === categories.length - 1 ? [2, 2, 0, 0] : [0, 0, 0, 0]}
+              radius={yAxisDomain ? [2, 2, 2, 2] : (index === categories.length - 1 ? [2, 2, 0, 0] : [0, 0, 0, 0])}
             />
           ))}
         </RechartsBarChart>

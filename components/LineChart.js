@@ -24,6 +24,7 @@ const LineChart = ({
   showTooltip = true,
   height = 200,
   startEndOnly = false,
+  yAxisDomain = null,
 }) => {
   const categoryColors = constructCategoryColors(categories, colors);
 
@@ -163,6 +164,12 @@ const LineChart = ({
 
   const getLineColor = (category) => {
     const color = categoryColors.get(category);
+    
+    // If the color is already a hex code, return it directly
+    if (color && color.startsWith('#')) {
+      return color;
+    }
+    
     const colorMap = {
       blue: '#0066F5',
       navy: '#1e40af',
@@ -213,6 +220,7 @@ const LineChart = ({
               tickLine={{ stroke: '#e5e7eb' }}
               axisLine={{ stroke: '#e5e7eb' }}
               tickFormatter={(value) => `${value}%`}
+              domain={yAxisDomain}
             />
           )}
           {showTooltip && <Tooltip content={<CustomTooltip />} cursor={{ strokeDasharray: '3 3' }} />}

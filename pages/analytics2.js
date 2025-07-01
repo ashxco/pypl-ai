@@ -15,28 +15,18 @@ export default function Analytics() {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
-    // Dropdown states
+  // Dropdown states
   const [timeDropdown, setTimeDropdown] = useState(false);
-  const [salesGroupingDropdown, setSalesGroupingDropdown] = useState(false);
-  const [aovGroupingDropdown, setAovGroupingDropdown] = useState(false);
-  const [conversionGroupingDropdown, setConversionGroupingDropdown] = useState(false);
-  const [authGroupingDropdown, setAuthGroupingDropdown] = useState(false);
-  const [disputeGroupingDropdown, setDisputeGroupingDropdown] = useState(false);
-
+  
   // Selected values
   const [selectedTime, setSelectedTime] = useState('Last 30 days');
-  const [selectedSalesGrouping, setSelectedSalesGrouping] = useState('by channel');
-  const [selectedAovGrouping, setSelectedAovGrouping] = useState('by payment method');
-  const [selectedConversionGrouping, setSelectedConversionGrouping] = useState('by user type');
-  const [selectedAuthGrouping, setSelectedAuthGrouping] = useState('by payment type');
-  const [selectedDisputeGrouping, setSelectedDisputeGrouping] = useState('by dispute type');
   
   // Visualization toggles
   const [showVisualization, setShowVisualization] = useState(true);
-  const [showAovVisualization, setShowAovVisualization] = useState(false);
-  const [showConversionVisualization, setShowConversionVisualization] = useState(false);
-  const [showAuthVisualization, setShowAuthVisualization] = useState(false);
-  const [showDisputeVisualization, setShowDisputeVisualization] = useState(false);
+  const [showAovVisualization, setShowAovVisualization] = useState(true);
+  const [showConversionVisualization, setShowConversionVisualization] = useState(true);
+  const [showAuthVisualization, setShowAuthVisualization] = useState(true);
+  const [showDisputeVisualization, setShowDisputeVisualization] = useState(true);
   
 
 
@@ -69,13 +59,8 @@ export default function Analytics() {
   // Close dropdowns when clicking outside
   useEffect(() => {
       const handleClickOutside = (event) => {
-    if (!event.target.closest(`[class*="customDropdown"]`) && !event.target.closest(`[class*="salesGroupingDropdown"]`)) {
+    if (!event.target.closest(`[class*="customDropdown"]`)) {
       setTimeDropdown(false);
-      setSalesGroupingDropdown(false);
-      setAovGroupingDropdown(false);
-      setConversionGroupingDropdown(false);
-      setAuthGroupingDropdown(false);
-      setDisputeGroupingDropdown(false);
     }
   };
 
@@ -195,36 +180,36 @@ export default function Analytics() {
 
   // Auth Rate data (percentage) - Payment authorization success rates
   const authData = [
-    { date: "Nov 1", paypal: 98.5, credit: 94.2, debit: 96.8, bank: 92.1 },
-    { date: "Nov 2", paypal: 98.2, credit: 93.8, debit: 96.5, bank: 91.7 },
-    { date: "Nov 3", paypal: 98.8, credit: 94.6, debit: 97.1, bank: 92.5 },
-    { date: "Nov 4", paypal: 98.6, credit: 94.3, debit: 96.9, bank: 92.2 },
-    { date: "Nov 5", paypal: 98.1, credit: 93.5, debit: 96.3, bank: 91.4 },
-    { date: "Nov 6", paypal: 97.9, credit: 93.2, debit: 96.1, bank: 91.1 },
-    { date: "Nov 7", paypal: 98.3, credit: 93.9, debit: 96.6, bank: 91.8 },
-    { date: "Nov 8", paypal: 98.7, credit: 94.4, debit: 97.0, bank: 92.3 },
-    { date: "Nov 9", paypal: 99.1, credit: 95.2, debit: 97.6, bank: 93.1 },
-    { date: "Nov 10", paypal: 99.2, credit: 95.4, debit: 97.8, bank: 93.3 },
-    { date: "Nov 11", paypal: 99.4, credit: 95.8, debit: 98.1, bank: 93.7 },
-    { date: "Nov 12", paypal: 98.9, credit: 94.9, debit: 97.4, bank: 92.8 },
-    { date: "Nov 13", paypal: 98.6, credit: 94.3, debit: 96.9, bank: 92.2 },
-    { date: "Nov 14", paypal: 98.0, credit: 93.3, debit: 96.2, bank: 91.2 },
-    { date: "Nov 15", paypal: 98.5, credit: 94.1, debit: 96.7, bank: 92.0 },
-    { date: "Nov 16", paypal: 99.0, credit: 95.1, debit: 97.5, bank: 93.0 },
-    { date: "Nov 17", paypal: 99.3, credit: 95.6, debit: 97.9, bank: 93.5 },
-    { date: "Nov 18", paypal: 98.8, credit: 94.7, debit: 97.2, bank: 92.6 },
-    { date: "Nov 19", paypal: 98.7, credit: 94.5, debit: 97.0, bank: 92.4 },
-    { date: "Nov 20", paypal: 98.4, credit: 94.0, debit: 96.7, bank: 91.9 },
-    { date: "Nov 21", paypal: 98.2, credit: 93.7, debit: 96.4, bank: 91.6 },
-    { date: "Nov 22", paypal: 98.6, credit: 94.2, debit: 96.8, bank: 92.1 },
-    { date: "Nov 23", paypal: 98.9, credit: 94.8, debit: 97.3, bank: 92.7 },
-    { date: "Nov 24", paypal: 99.5, credit: 96.1, debit: 98.3, bank: 94.0 },
-    { date: "Nov 25", paypal: 98.7, credit: 94.4, debit: 97.0, bank: 92.3 },
-    { date: "Nov 26", paypal: 98.3, credit: 93.9, debit: 96.6, bank: 91.8 },
-    { date: "Nov 27", paypal: 98.5, credit: 94.1, debit: 96.8, bank: 92.0 },
-    { date: "Nov 28", paypal: 99.0, credit: 95.0, debit: 97.4, bank: 92.9 },
-    { date: "Nov 29", paypal: 99.2, credit: 95.3, debit: 97.7, bank: 93.2 },
-    { date: "Nov 30", paypal: 98.8, credit: 94.6, debit: 97.1, bank: 92.5 },
+    { date: "Nov 1", overall: 95.4, paypal: 98.5, credit: 94.2, debit: 96.8, bank: 92.1 },
+    { date: "Nov 2", overall: 95.1, paypal: 98.2, credit: 93.8, debit: 96.5, bank: 91.7 },
+    { date: "Nov 3", overall: 95.8, paypal: 98.8, credit: 94.6, debit: 97.1, bank: 92.5 },
+    { date: "Nov 4", overall: 95.5, paypal: 98.6, credit: 94.3, debit: 96.9, bank: 92.2 },
+    { date: "Nov 5", overall: 94.8, paypal: 98.1, credit: 93.5, debit: 96.3, bank: 91.4 },
+    { date: "Nov 6", overall: 94.6, paypal: 97.9, credit: 93.2, debit: 96.1, bank: 91.1 },
+    { date: "Nov 7", overall: 95.2, paypal: 98.3, credit: 93.9, debit: 96.6, bank: 91.8 },
+    { date: "Nov 8", overall: 95.6, paypal: 98.7, credit: 94.4, debit: 97.0, bank: 92.3 },
+    { date: "Nov 9", overall: 96.3, paypal: 99.1, credit: 95.2, debit: 97.6, bank: 93.1 },
+    { date: "Nov 10", overall: 96.4, paypal: 99.2, credit: 95.4, debit: 97.8, bank: 93.3 },
+    { date: "Nov 11", overall: 96.8, paypal: 99.4, credit: 95.8, debit: 98.1, bank: 93.7 },
+    { date: "Nov 12", overall: 96.0, paypal: 98.9, credit: 94.9, debit: 97.4, bank: 92.8 },
+    { date: "Nov 13", overall: 95.5, paypal: 98.6, credit: 94.3, debit: 96.9, bank: 92.2 },
+    { date: "Nov 14", overall: 94.7, paypal: 98.0, credit: 93.3, debit: 96.2, bank: 91.2 },
+    { date: "Nov 15", overall: 95.3, paypal: 98.5, credit: 94.1, debit: 96.7, bank: 92.0 },
+    { date: "Nov 16", overall: 96.2, paypal: 99.0, credit: 95.1, debit: 97.5, bank: 93.0 },
+    { date: "Nov 17", overall: 96.6, paypal: 99.3, credit: 95.6, debit: 97.9, bank: 93.5 },
+    { date: "Nov 18", overall: 95.8, paypal: 98.8, credit: 94.7, debit: 97.2, bank: 92.6 },
+    { date: "Nov 19", overall: 95.7, paypal: 98.7, credit: 94.5, debit: 97.0, bank: 92.4 },
+    { date: "Nov 20", overall: 95.3, paypal: 98.4, credit: 94.0, debit: 96.7, bank: 91.9 },
+    { date: "Nov 21", overall: 95.0, paypal: 98.2, credit: 93.7, debit: 96.4, bank: 91.6 },
+    { date: "Nov 22", overall: 95.4, paypal: 98.6, credit: 94.2, debit: 96.8, bank: 92.1 },
+    { date: "Nov 23", overall: 95.9, paypal: 98.9, credit: 94.8, debit: 97.3, bank: 92.7 },
+    { date: "Nov 24", overall: 97.0, paypal: 99.5, credit: 96.1, debit: 98.3, bank: 94.0 },
+    { date: "Nov 25", overall: 95.6, paypal: 98.7, credit: 94.4, debit: 97.0, bank: 92.3 },
+    { date: "Nov 26", overall: 95.2, paypal: 98.3, credit: 93.9, debit: 96.6, bank: 91.8 },
+    { date: "Nov 27", overall: 95.4, paypal: 98.5, credit: 94.1, debit: 96.8, bank: 92.0 },
+    { date: "Nov 28", overall: 96.1, paypal: 99.0, credit: 95.0, debit: 97.4, bank: 92.9 },
+    { date: "Nov 29", overall: 96.4, paypal: 99.2, credit: 95.3, debit: 97.7, bank: 93.2 },
+    { date: "Nov 30", overall: 95.8, paypal: 98.8, credit: 94.6, debit: 97.1, bank: 92.5 },
   ];
 
   // Dispute Rate data (percentage) - Transaction dispute rates
@@ -272,11 +257,6 @@ export default function Analytics() {
   // Close all dropdowns helper function
   const closeAllDropdowns = () => {
     setTimeDropdown(false);
-    setSalesGroupingDropdown(false);
-    setAovGroupingDropdown(false);
-    setConversionGroupingDropdown(false);
-    setAuthGroupingDropdown(false);
-    setDisputeGroupingDropdown(false);
   };
 
   // Custom toggle functions that close other dropdowns
@@ -286,51 +266,6 @@ export default function Analytics() {
     } else {
       closeAllDropdowns();
       setTimeDropdown(true);
-    }
-  };
-
-  const toggleSalesGroupingDropdown = () => {
-    if (salesGroupingDropdown) {
-      setSalesGroupingDropdown(false);
-    } else {
-      closeAllDropdowns();
-      setSalesGroupingDropdown(true);
-    }
-  };
-
-  const toggleAovGroupingDropdown = () => {
-    if (aovGroupingDropdown) {
-      setAovGroupingDropdown(false);
-    } else {
-      closeAllDropdowns();
-      setAovGroupingDropdown(true);
-    }
-  };
-
-  const toggleConversionGroupingDropdown = () => {
-    if (conversionGroupingDropdown) {
-      setConversionGroupingDropdown(false);
-    } else {
-      closeAllDropdowns();
-      setConversionGroupingDropdown(true);
-    }
-  };
-
-  const toggleAuthGroupingDropdown = () => {
-    if (authGroupingDropdown) {
-      setAuthGroupingDropdown(false);
-    } else {
-      closeAllDropdowns();
-      setAuthGroupingDropdown(true);
-    }
-  };
-
-  const toggleDisputeGroupingDropdown = () => {
-    if (disputeGroupingDropdown) {
-      setDisputeGroupingDropdown(false);
-    } else {
-      closeAllDropdowns();
-      setDisputeGroupingDropdown(true);
     }
   };
 
@@ -391,7 +326,7 @@ export default function Analytics() {
             <div className={styles.pageTitle}>
               <h1 
                 className={styles.clickableTitle}
-                onClick={() => router.push('/analytics2')}
+                onClick={() => router.push('/analytics')}
               >
                 Business Performance
               </h1>
@@ -409,42 +344,65 @@ export default function Analytics() {
               </div>
             </div>
 
-            <div className={styles.mainContent}>
-              {/* Left Panel */}
-              <div className={styles.leftPanel}>
+            {/* Highlights Section - Full Width */}
+            <div className={styles.highlightsSection}>
+              <div className={styles.highlightsGrid}>
+                <div className={styles.highlightItem}>
+                  <div className={styles.highlightLeft}>
+                    <div className={styles.insightIcon}>
+                      <i className="ph ph-lightbulb"></i>
+                    </div>
+                    <div className={styles.highlightContent}>
+                      <div className={styles.insightTitle}>Revenue Opportunity</div>
+                      <div className={styles.insightText}>Your conversion rate is 15% higher on weekends. Consider running targeted campaigns on Friday-Sunday.</div>
+                    </div>
+                  </div>
+                  <div className={styles.highlightRight}>
+                    <button className={styles.insightCta}>Create Campaign</button>
+                  </div>
+                </div>
+                
+                <div className={styles.highlightItem}>
+                  <div className={styles.highlightLeft}>
+                    <div className={styles.insightIcon}>
+                      <i className="ph ph-trend-up"></i>
+                    </div>
+                    <div className={styles.highlightContent}>
+                      <div className={styles.insightTitle}>Trending Product</div>
+                      <div className={styles.insightText}>Art Canvas Print sales increased 45% this month. Stock levels may need adjustment to meet demand.</div>
+                    </div>
+                  </div>
+                  <div className={styles.highlightRight}>
+                    <button className={styles.insightCta}>Adjust Inventory</button>
+                  </div>
+                </div>
+                
+                <div className={styles.highlightItem}>
+                  <div className={styles.highlightLeft}>
+                    <div className={styles.insightIcon}>
+                      <i className="ph ph-warning"></i>
+                    </div>
+                    <div className={styles.highlightContent}>
+                      <div className={styles.insightTitle}>Customer Retention Alert</div>
+                      <div className={styles.insightText}>23% of customers haven't returned in 60+ days. Consider launching a re-engagement email campaign.</div>
+                    </div>
+                  </div>
+                  <div className={styles.highlightRight}>
+                    <button className={styles.insightCta}>Launch Campaign</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.twoColumnLayout}>
+              {/* Left Column */}
+              <div className={styles.leftColumn}>
 
 
                 {/* Sales */}
                 <div className={styles.dailyStats}>
                   <div className={styles.salesHeader}>
-                    <h3>
-                      Sales{' '}
-                      <div className={styles.salesGroupingDropdown}>
-                        <span 
-                          className={styles.salesGroupingText}
-                          onClick={toggleSalesGroupingDropdown}
-                        >
-                          {selectedSalesGrouping}
-                          <i className={`ph ph-caret-down ${styles.salesGroupingIcon} ${salesGroupingDropdown ? styles.rotated : ''}`}></i>
-                        </span>
-                        {salesGroupingDropdown && (
-                          <div className={styles.salesGroupingMenu}>
-                            {['by channel', 'by payment method', 'by region', 'by customer segment', 'by product'].map((option, index) => (
-                              <div
-                                key={index}
-                                className={`${styles.salesGroupingItem} ${option === selectedSalesGrouping ? styles.selected : ''}`}
-                                onClick={() => {
-                                  setSelectedSalesGrouping(option);
-                                  setSalesGroupingDropdown(false);
-                                }}
-                              >
-                                {option}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </h3>
+                    <h3>Sales</h3>
                     <div className={styles.salesControls}>
                       <div className={styles.toggleContainer}>
                         <span className={styles.toggleLabel}>Chart</span>
@@ -527,135 +485,10 @@ export default function Analytics() {
                   </div>
                 </div>
 
-                {/* Average Order Value */}
-                <div className={styles.dailyStats}>
-                  <div className={styles.salesHeader}>
-                    <h3>
-                      Average Order Value{' '}
-                      <div className={styles.salesGroupingDropdown}>
-                        <span 
-                          className={styles.salesGroupingText}
-                          onClick={toggleAovGroupingDropdown}
-                        >
-                          {selectedAovGrouping}
-                          <i className={`ph ph-caret-down ${styles.salesGroupingIcon} ${aovGroupingDropdown ? styles.rotated : ''}`}></i>
-                        </span>
-                        {aovGroupingDropdown && (
-                          <div className={styles.salesGroupingMenu}>
-                            {['by payment method', 'by region', 'by customer segment', 'by product category'].map((option, index) => (
-                              <div
-                                key={index}
-                                className={`${styles.salesGroupingItem} ${option === selectedAovGrouping ? styles.selected : ''}`}
-                                onClick={() => {
-                                  setSelectedAovGrouping(option);
-                                  setAovGroupingDropdown(false);
-                                }}
-                              >
-                                {option}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </h3>
-                    <div className={styles.salesControls}>
-                      <div className={styles.toggleContainer}>
-                        <span className={styles.toggleLabel}>Chart</span>
-                        <label className={styles.toggleSwitch}>
-                          <input 
-                            type="checkbox" 
-                            checked={showAovVisualization}
-                            onChange={(e) => setShowAovVisualization(e.target.checked)}
-                          />
-                          <span className={styles.toggleSlider}></span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* AOV Bar Chart - with slide animation */}
-                  <div className={`${styles.chartContainer} ${!showAovVisualization ? styles.hidden : ''}`}>
-                    <BarChart
-                      data={aovData}
-                      index="date"
-                      categories={["paypal", "paypalCredit", "creditDebit"]}
-                      colors={["navy", "blue", "cyan"]}
-                      valueFormatter={(value) => {
-                        return `$${value.toFixed(2)}`;
-                      }}
-                      height={250}
-                      showGridLines={true}
-                      showTooltip={true}
-                      startEndOnly={true}
-                    />
-                  </div>
-                  
-                  {/* Legend Header */}
-                  <div className={styles.legendHeader}>
-                    <div className={styles.legendHeaderLabel}>Payment Method</div>
-                    <div className={styles.legendHeaderChange}>30d Change</div>
-                    <div className={styles.legendHeaderValue}>Average</div>
-                  </div>
-                  
-                  <div className={styles.statRow}>
-                    <div className={styles.statLabel}>
-                      {showAovVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#1e40af' }}></div>}
-                      <span>PayPal</span>
-                    </div>
-                    <span className={styles.changePositive}>+5.4%</span>
-                    <span>${(aovData.reduce((sum, item) => sum + item.paypal, 0) / aovData.length).toFixed(2)}</span>
-                  </div>
-                  
-                  <div className={styles.statRow}>
-                    <div className={styles.statLabel}>
-                      {showAovVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#0066F5' }}></div>}
-                      <span>PayPal Credit</span>
-                    </div>
-                    <span className={styles.changePositive}>+2.1%</span>
-                    <span>${(aovData.reduce((sum, item) => sum + item.paypalCredit, 0) / aovData.length).toFixed(2)}</span>
-                  </div>
-                  
-                  <div className={styles.statRow}>
-                    <div className={styles.statLabel}>
-                      {showAovVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#06b6d4' }}></div>}
-                      <span>Credit and Debit Cards</span>
-                    </div>
-                    <span className={styles.changeNegative}>-1.8%</span>
-                    <span>${(aovData.reduce((sum, item) => sum + item.creditDebit, 0) / aovData.length).toFixed(2)}</span>
-                  </div>
-                </div>
-
                 {/* PayPal Checkout Conversion Rate */}
                 <div className={styles.dailyStats}>
                   <div className={styles.salesHeader}>
-                    <h3>
-                      PayPal Checkout Conversion Rate{' '}
-                      <div className={styles.salesGroupingDropdown}>
-                        <span 
-                          className={styles.salesGroupingText}
-                          onClick={toggleConversionGroupingDropdown}
-                        >
-                          {selectedConversionGrouping}
-                          <i className={`ph ph-caret-down ${styles.salesGroupingIcon} ${conversionGroupingDropdown ? styles.rotated : ''}`}></i>
-                        </span>
-                        {conversionGroupingDropdown && (
-                          <div className={styles.salesGroupingMenu}>
-                            {['by user type', 'by device type', 'by region', 'by traffic source'].map((option, index) => (
-                              <div
-                                key={index}
-                                className={`${styles.salesGroupingItem} ${option === selectedConversionGrouping ? styles.selected : ''}`}
-                                onClick={() => {
-                                  setSelectedConversionGrouping(option);
-                                  setConversionGroupingDropdown(false);
-                                }}
-                              >
-                                {option}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </h3>
+                    <h3>PayPal Checkout Conversion Rate</h3>
                     <div className={styles.salesControls}>
                       <div className={styles.toggleContainer}>
                         <span className={styles.toggleLabel}>Chart</span>
@@ -714,145 +547,10 @@ export default function Analytics() {
                   </div>
                 </div>
 
-                {/* Auth Rate */}
-                <div className={styles.dailyStats}>
-                  <div className={styles.salesHeader}>
-                    <h3>
-                      Auth Rate{' '}
-                      <div className={styles.salesGroupingDropdown}>
-                        <span 
-                          className={styles.salesGroupingText}
-                          onClick={toggleAuthGroupingDropdown}
-                        >
-                          {selectedAuthGrouping}
-                          <i className={`ph ph-caret-down ${styles.salesGroupingIcon} ${authGroupingDropdown ? styles.rotated : ''}`}></i>
-                        </span>
-                        {authGroupingDropdown && (
-                          <div className={styles.salesGroupingMenu}>
-                            {['by payment type', 'by region', 'by merchant category', 'by transaction amount'].map((option, index) => (
-                              <div
-                                key={index}
-                                className={`${styles.salesGroupingItem} ${option === selectedAuthGrouping ? styles.selected : ''}`}
-                                onClick={() => {
-                                  setSelectedAuthGrouping(option);
-                                  setAuthGroupingDropdown(false);
-                                }}
-                              >
-                                {option}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </h3>
-                    <div className={styles.salesControls}>
-                      <div className={styles.toggleContainer}>
-                        <span className={styles.toggleLabel}>Chart</span>
-                        <label className={styles.toggleSwitch}>
-                          <input 
-                            type="checkbox" 
-                            checked={showAuthVisualization}
-                            onChange={(e) => setShowAuthVisualization(e.target.checked)}
-                          />
-                          <span className={styles.toggleSlider}></span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Auth Rate Line Chart - with slide animation */}
-                  <div className={`${styles.chartContainer} ${!showAuthVisualization ? styles.hidden : ''}`}>
-                    <LineChart
-                      data={authData}
-                      index="date"
-                      categories={["paypal", "credit", "debit", "bank"]}
-                      colors={["navy", "blue", "cyan", "purple"]}
-                      valueFormatter={(value) => {
-                        return `${value.toFixed(1)}%`;
-                      }}
-                      height={250}
-                      showGridLines={true}
-                      showTooltip={true}
-                      startEndOnly={true}
-                      yAxisDomain={[90, 100]}
-                    />
-                  </div>
-                  
-                  {/* Legend Header */}
-                  <div className={styles.legendHeader}>
-                    <div className={styles.legendHeaderLabel}>Payment Type</div>
-                    <div className={styles.legendHeaderChange}>30d Change</div>
-                    <div className={styles.legendHeaderValue}>Success Rate</div>
-                  </div>
-                  
-                  <div className={styles.statRow}>
-                    <div className={styles.statLabel}>
-                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#1e40af' }}></div>}
-                      <span>PayPal</span>
-                    </div>
-                    <span className={styles.changePositive}>+0.8%</span>
-                    <span>{(authData.reduce((sum, item) => sum + item.paypal, 0) / authData.length).toFixed(1)}%</span>
-                  </div>
-                  
-                  <div className={styles.statRow}>
-                    <div className={styles.statLabel}>
-                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#0066F5' }}></div>}
-                      <span>Credit Cards</span>
-                    </div>
-                    <span className={styles.changePositive}>+1.2%</span>
-                    <span>{(authData.reduce((sum, item) => sum + item.credit, 0) / authData.length).toFixed(1)}%</span>
-                  </div>
-                  
-                  <div className={styles.statRow}>
-                    <div className={styles.statLabel}>
-                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#06b6d4' }}></div>}
-                      <span>Debit Cards</span>
-                    </div>
-                    <span className={styles.changePositive}>+0.6%</span>
-                    <span>{(authData.reduce((sum, item) => sum + item.debit, 0) / authData.length).toFixed(1)}%</span>
-                  </div>
-                  
-                  <div className={styles.statRow}>
-                    <div className={styles.statLabel}>
-                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#8b5cf6' }}></div>}
-                      <span>Bank Transfer</span>
-                    </div>
-                    <span className={styles.changeNegative}>-0.3%</span>
-                    <span>{(authData.reduce((sum, item) => sum + item.bank, 0) / authData.length).toFixed(1)}%</span>
-                  </div>
-                </div>
-
                 {/* Dispute Rate */}
                 <div className={styles.dailyStats}>
                   <div className={styles.salesHeader}>
-                    <h3>
-                      Dispute Rate{' '}
-                      <div className={styles.salesGroupingDropdown}>
-                        <span 
-                          className={styles.salesGroupingText}
-                          onClick={toggleDisputeGroupingDropdown}
-                        >
-                          {selectedDisputeGrouping}
-                          <i className={`ph ph-caret-down ${styles.salesGroupingIcon} ${disputeGroupingDropdown ? styles.rotated : ''}`}></i>
-                        </span>
-                        {disputeGroupingDropdown && (
-                          <div className={styles.salesGroupingMenu}>
-                            {['by dispute type', 'by payment method', 'by region', 'by merchant category'].map((option, index) => (
-                              <div
-                                key={index}
-                                className={`${styles.salesGroupingItem} ${option === selectedDisputeGrouping ? styles.selected : ''}`}
-                                onClick={() => {
-                                  setSelectedDisputeGrouping(option);
-                                  setDisputeGroupingDropdown(false);
-                                }}
-                              >
-                                {option}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </h3>
+                    <h3>Dispute Rate</h3>
                     <div className={styles.salesControls}>
                       <div className={styles.toggleContainer}>
                         <span className={styles.toggleLabel}>Chart</span>
@@ -922,90 +620,170 @@ export default function Analytics() {
 
               </div>
 
-              {/* Right Panel - Recent Orders */}
-              <div className={styles.rightPanel}>
-                <div className={styles.recentOrders}>
-                  <h3>Highlights</h3>
-                  <div className={styles.insightsList}>
-                    <div className={styles.insightItem}>
-                      <div className={styles.insightIcon}>
-                        <i className="ph ph-lightbulb"></i>
-                      </div>
-                      <div className={styles.insightContent}>
-                        <div className={styles.insightTitle}>Revenue Opportunity</div>
-                        <div className={styles.insightText}>Your conversion rate is 15% higher on weekends. Consider running targeted campaigns on Friday-Sunday.</div>
-                        <div className={styles.insightActions}>
-                          <button className={styles.insightCta}>Create Campaign</button>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className={styles.insightItem}>
-                      <div className={styles.insightIcon}>
-                        <i className="ph ph-trend-up"></i>
-                      </div>
-                      <div className={styles.insightContent}>
-                        <div className={styles.insightTitle}>Trending Product</div>
-                        <div className={styles.insightText}>Art Canvas Print sales increased 45% this month. Stock levels may need adjustment to meet demand.</div>
-                        <div className={styles.insightActions}>
-                          <button className={styles.insightCta}>Adjust Inventory</button>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className={styles.insightItem}>
-                      <div className={styles.insightIcon}>
-                        <i className="ph ph-warning"></i>
-                      </div>
-                      <div className={styles.insightContent}>
-                        <div className={styles.insightTitle}>Customer Retention Alert</div>
-                        <div className={styles.insightText}>23% of customers haven't returned in 60+ days. Consider launching a re-engagement email campaign.</div>
-                        <div className={styles.insightActions}>
-                          <button className={styles.insightCta}>Launch Campaign</button>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className={styles.insightItem}>
-                      <div className={styles.insightIcon}>
-                        <i className="ph ph-device-mobile"></i>
-                      </div>
-                      <div className={styles.insightContent}>
-                        <div className={styles.insightTitle}>Optimization Tip</div>
-                        <div className={styles.insightText}>Mobile users show 28% lower conversion. Optimize mobile checkout flow to capture missed revenue.</div>
-                        <div className={styles.insightActions}>
-                          <button className={styles.insightCta}>Optimize Now</button>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className={styles.insightItem}>
-                      <div className={styles.insightIcon}>
-                        <i className="ph ph-trophy"></i>
-                      </div>
-                      <div className={styles.insightContent}>
-                        <div className={styles.insightTitle}>Peak Performance</div>
-                        <div className={styles.insightText}>Yesterday achieved your highest daily revenue in 3 months. Analyze what drove this success.</div>
-                        <div className={styles.insightActions}>
-                          <button className={styles.insightCta}>View Analysis</button>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className={styles.insightItem}>
-                      <div className={styles.insightIcon}>
-                        <i className="ph ph-credit-card"></i>
-                      </div>
-                      <div className={styles.insightContent}>
-                        <div className={styles.insightTitle}>Payment Insights</div>
-                        <div className={styles.insightText}>PayPal transactions have 12% higher average order value. Promote this payment option more prominently.</div>
-                        <div className={styles.insightActions}>
-                          <button className={styles.insightCta}>Update Settings</button>
-                        </div>
+              {/* Right Column */}
+              <div className={styles.rightColumn}>
+
+                {/* Average Order Value */}
+                <div className={styles.dailyStats}>
+                  <div className={styles.salesHeader}>
+                    <h3>Average Order Value</h3>
+                    <div className={styles.salesControls}>
+                      <div className={styles.toggleContainer}>
+                        <span className={styles.toggleLabel}>Chart</span>
+                        <label className={styles.toggleSwitch}>
+                          <input 
+                            type="checkbox" 
+                            checked={showAovVisualization}
+                            onChange={(e) => setShowAovVisualization(e.target.checked)}
+                          />
+                          <span className={styles.toggleSlider}></span>
+                        </label>
                       </div>
                     </div>
                   </div>
+                  
+                  {/* AOV Bar Chart - with slide animation */}
+                  <div className={`${styles.chartContainer} ${!showAovVisualization ? styles.hidden : ''}`}>
+                    <BarChart
+                      data={aovData}
+                      index="date"
+                      categories={["paypal", "paypalCredit", "creditDebit"]}
+                      colors={["navy", "blue", "cyan"]}
+                      valueFormatter={(value) => {
+                        return `$${value.toFixed(2)}`;
+                      }}
+                      height={250}
+                      showGridLines={true}
+                      showTooltip={true}
+                      startEndOnly={true}
+                    />
+                  </div>
+                  
+                  {/* Legend Header */}
+                  <div className={styles.legendHeader}>
+                    <div className={styles.legendHeaderLabel}>Payment Method</div>
+                    <div className={styles.legendHeaderChange}>30d Change</div>
+                    <div className={styles.legendHeaderValue}>Average</div>
+                  </div>
+                  
+                  <div className={styles.statRow}>
+                    <div className={styles.statLabel}>
+                      {showAovVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#1e40af' }}></div>}
+                      <span>PayPal</span>
+                    </div>
+                    <span className={styles.changePositive}>+5.4%</span>
+                    <span>${(aovData.reduce((sum, item) => sum + item.paypal, 0) / aovData.length).toFixed(2)}</span>
+                  </div>
+                  
+                  <div className={styles.statRow}>
+                    <div className={styles.statLabel}>
+                      {showAovVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#0066F5' }}></div>}
+                      <span>PayPal Credit</span>
+                    </div>
+                    <span className={styles.changePositive}>+2.1%</span>
+                    <span>${(aovData.reduce((sum, item) => sum + item.paypalCredit, 0) / aovData.length).toFixed(2)}</span>
+                  </div>
+                  
+                  <div className={styles.statRow}>
+                    <div className={styles.statLabel}>
+                      {showAovVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#06b6d4' }}></div>}
+                      <span>Credit and Debit Cards</span>
+                    </div>
+                    <span className={styles.changeNegative}>-1.8%</span>
+                    <span>${(aovData.reduce((sum, item) => sum + item.creditDebit, 0) / aovData.length).toFixed(2)}</span>
+                  </div>
                 </div>
+
+                {/* Auth Rate */}
+                <div className={styles.dailyStats}>
+                  <div className={styles.salesHeader}>
+                    <h3>Auth Rate</h3>
+                    <div className={styles.salesControls}>
+                      <div className={styles.toggleContainer}>
+                        <span className={styles.toggleLabel}>Chart</span>
+                        <label className={styles.toggleSwitch}>
+                          <input 
+                            type="checkbox" 
+                            checked={showAuthVisualization}
+                            onChange={(e) => setShowAuthVisualization(e.target.checked)}
+                          />
+                          <span className={styles.toggleSlider}></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Auth Rate Bar Chart - with slide animation */}
+                  <div className={`${styles.chartContainer} ${!showAuthVisualization ? styles.hidden : ''}`}>
+                    <BarChart
+                      data={authData}
+                      index="date"
+                      categories={["overall"]}
+                      colors={["#1e40af"]}
+                      valueFormatter={(value) => {
+                        return `${value.toFixed(1)}%`;
+                      }}
+                      height={250}
+                      showGridLines={true}
+                      showTooltip={true}
+                      startEndOnly={true}
+                      yAxisDomain={[90, 100]}
+                    />
+                  </div>
+                  
+                  {/* Legend Header */}
+                  <div className={styles.legendHeader}>
+                    <div className={styles.legendHeaderLabel}>Payment Type</div>
+                    <div className={styles.legendHeaderChange}>30d Change</div>
+                    <div className={styles.legendHeaderValue}>Success Rate</div>
+                  </div>
+                  
+                  <div className={styles.statRow}>
+                    <div className={styles.statLabel}>
+                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#1e40af' }}></div>}
+                      <span style={{ fontWeight: 'bold' }}>Overall</span>
+                    </div>
+                    <span className={styles.changePositive}>+0.7%</span>
+                    <span>{(authData.reduce((sum, item) => sum + item.overall, 0) / authData.length).toFixed(1)}%</span>
+                  </div>
+                  
+                  <div className={styles.statRow}>
+                    <div className={styles.statLabel}>
+                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#0066F5' }}></div>}
+                      <span>PayPal</span>
+                    </div>
+                    <span className={styles.changePositive}>+0.8%</span>
+                    <span>{(authData.reduce((sum, item) => sum + item.paypal, 0) / authData.length).toFixed(1)}%</span>
+                  </div>
+                  
+                  <div className={styles.statRow}>
+                    <div className={styles.statLabel}>
+                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#00C853' }}></div>}
+                      <span>Credit Cards</span>
+                    </div>
+                    <span className={styles.changePositive}>+1.2%</span>
+                    <span>{(authData.reduce((sum, item) => sum + item.credit, 0) / authData.length).toFixed(1)}%</span>
+                  </div>
+                  
+                  <div className={styles.statRow}>
+                    <div className={styles.statLabel}>
+                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#FF6D00' }}></div>}
+                      <span>Debit Cards</span>
+                    </div>
+                    <span className={styles.changePositive}>+0.6%</span>
+                    <span>{(authData.reduce((sum, item) => sum + item.debit, 0) / authData.length).toFixed(1)}%</span>
+                  </div>
+                  
+                  <div className={styles.statRow}>
+                    <div className={styles.statLabel}>
+                      {showAuthVisualization && <div className={styles.legendColor} style={{ backgroundColor: '#9C27B0' }}></div>}
+                      <span>Bank Transfer</span>
+                    </div>
+                    <span className={styles.changeNegative}>-0.3%</span>
+                    <span>{(authData.reduce((sum, item) => sum + item.bank, 0) / authData.length).toFixed(1)}%</span>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

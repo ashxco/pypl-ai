@@ -11,6 +11,7 @@ import RecentActivityTable from '../components/RecentActivityTable';
 import ScrollableSection from '../components/ScrollableSection';
 import Footer from '../components/Footer';
 import styles from '../styles/Main.module.css';
+import Head from 'next/head';
 
 export default function Home() {
   const router = useRouter();
@@ -62,6 +63,9 @@ export default function Home() {
 
   return (
     <div style={{ height: '100vh' }}>
+      <Head>
+        <title>PayPal | Home</title>
+      </Head>
       <Sidebar 
         username={displayUser} 
         isAdmin={false} 
