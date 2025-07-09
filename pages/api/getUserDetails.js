@@ -60,7 +60,6 @@ export default function handler(req, res) {
     const conversionRate = totalTransactions > 0 ? (completedTransactions.length / totalTransactions) * 100 : 0;
     
     // Count unique customers (for repeat customers calculation)
-    const uniqueCustomers = new Set(completedTransactions.map(tx => tx.customer));
     const customerTransactionCounts = {};
     completedTransactions.forEach(tx => {
       customerTransactionCounts[tx.customer] = (customerTransactionCounts[tx.customer] || 0) + 1;

@@ -4,7 +4,6 @@ import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import TotalBalanceSection from '../components/TotalBalanceSection';
 import TopCardsWrapper from '../components/TopCardsWrapper';
-import BalanceCardHome3 from '../components/BalanceCardHome3';
 import RecentActivityTableHome3 from '../components/RecentActivityTableHome3';
 import ChatPromptBox from '../components/ChatPromptBox';
 import QuestionPills from '../components/QuestionPills';
@@ -12,6 +11,9 @@ import FullScreenChat from '../components/FullScreenChat';
 import Footer from '../components/Footer';
 import styles from '../styles/Main.module.css';
 import Head from 'next/head';
+import AnalyticsWrapperHome3 from '../components/AnalyticsWrapperHome3';
+import SinceLoginCard from '../components/SinceLoginCard';
+import BusinessGlanceCard from '../components/BusinessGlanceCard';
 
 export default function Home3() {
   const router = useRouter();

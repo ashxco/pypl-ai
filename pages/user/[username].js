@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import Button from '../../components/Button';
+import { useRouter } from 'next/router';
+import db from '../../lib/db';
 
 export async function getServerSideProps({ req, params }) {
   const cookies = req.headers.cookie || '';
@@ -15,9 +15,6 @@ export async function getServerSideProps({ req, params }) {
     };
   }
 
-  // Import db here to avoid issues with server-side rendering
-  const db = require('../../lib/db').default;
-  
   try {
     const user = db.prepare('SELECT * FROM users WHERE username = ?').get(params.username);
     
@@ -1613,104 +1610,104 @@ export default function UserDetails({ user: initialUser, username }) {
                     />
                   </div>
 
-                                     <div style={{ marginBottom: '16px' }}>
-                     <label style={{
-                       display: 'block',
-                       marginBottom: '6px',
-                       fontSize: '14px',
-                       fontWeight: '500',
-                       color: '#374151'
-                     }}>
-                       Fees ($) <span style={{ color: '#059669', fontSize: '12px' }}>• Auto-calculated</span>
-                     </label>
-                     <input
-                       type="number"
-                       step="0.01"
-                       value={editingTransaction.fees || ''}
-                       onChange={(e) => handleTransactionFormChange('fees', e.target.value)}
-                       style={{
-                         width: '100%',
-                         padding: '12px',
-                         border: '1px solid #d1d5db',
-                         borderRadius: '8px',
-                         fontSize: '14px',
-                         boxSizing: 'border-box',
-                         backgroundColor: '#f8fafc'
-                       }}
-                       placeholder="Auto-calculated from amount"
-                     />
-                     <p style={{
-                       margin: '4px 0 0 0',
-                       fontSize: '11px',
-                       color: '#6b7280',
-                       fontStyle: 'italic'
-                     }}>
-                       Based on 2.9% + $0.30 fee structure. Can be manually adjusted.
-                     </p>
-                   </div>
+                  <div style={{ marginBottom: '16px' }}>
+                    <label style={{
+                      display: 'block',
+                      marginBottom: '6px',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      color: '#374151'
+                    }}>
+                      Fees ($) <span style={{ color: '#059669', fontSize: '12px' }}>• Auto-calculated</span>
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={editingTransaction.fees || ''}
+                      onChange={(e) => handleTransactionFormChange('fees', e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: '1px solid #d1d5db',
+                        borderRadius: '8px',
+                        fontSize: '14px',
+                        boxSizing: 'border-box',
+                        backgroundColor: '#f8fafc'
+                      }}
+                      placeholder="Auto-calculated from amount"
+                    />
+                    <p style={{
+                      margin: '4px 0 0 0',
+                      fontSize: '11px',
+                      color: '#6b7280',
+                      fontStyle: 'italic'
+                    }}>
+                      Based on 2.9% + $0.30 fee structure. Can be manually adjusted.
+                    </p>
+                  </div>
 
-                                     <div style={{ marginBottom: '16px' }}>
-                     <label style={{
-                       display: 'block',
-                       marginBottom: '6px',
-                       fontSize: '14px',
-                       fontWeight: '500',
-                       color: '#374151'
-                     }}>
-                       Net Total ($) <span style={{ color: '#059669', fontSize: '12px' }}>• Auto-calculated</span>
-                     </label>
-                     <input
-                       type="number"
-                       step="0.01"
-                       value={editingTransaction.total || ''}
-                       readOnly
-                       style={{
-                         width: '100%',
-                         padding: '12px',
-                         border: '1px solid #d1d5db',
-                         borderRadius: '8px',
-                         fontSize: '14px',
-                         boxSizing: 'border-box',
-                         backgroundColor: '#f9fafb',
-                         color: '#374151',
-                         fontWeight: '600'
-                       }}
-                       placeholder="Amount - Fees"
-                     />
-                     <p style={{
-                       margin: '4px 0 0 0',
-                       fontSize: '11px',
-                       color: '#6b7280',
-                       fontStyle: 'italic'
-                     }}>
-                       Net amount after fees (Amount - Fees)
-                     </p>
-                   </div>
+                  <div style={{ marginBottom: '16px' }}>
+                    <label style={{
+                      display: 'block',
+                      marginBottom: '6px',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      color: '#374151'
+                    }}>
+                      Net Total ($) <span style={{ color: '#059669', fontSize: '12px' }}>• Auto-calculated</span>
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={editingTransaction.total || ''}
+                      readOnly
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        border: '1px solid #d1d5db',
+                        borderRadius: '8px',
+                        fontSize: '14px',
+                        boxSizing: 'border-box',
+                        backgroundColor: '#f9fafb',
+                        color: '#374151',
+                        fontWeight: '600'
+                      }}
+                      placeholder="Amount - Fees"
+                    />
+                    <p style={{
+                      margin: '4px 0 0 0',
+                      fontSize: '11px',
+                      color: '#6b7280',
+                      fontStyle: 'italic'
+                    }}>
+                      Net amount after fees (Amount - Fees)
+                    </p>
+                  </div>
 
-                                     <div style={{
-                     background: '#f0f9ff',
-                     border: '1px solid #bae6fd',
-                     borderRadius: '8px',
-                     padding: '16px',
-                     marginBottom: '16px'
-                   }}>
-                     <h4 style={{
-                       margin: '0 0 8px 0',
-                       fontSize: '14px',
-                       fontWeight: '600',
-                       color: '#0369a1'
-                     }}>
-                       🤖 Auto-Calculation
-                     </h4>
-                     <p style={{
-                       margin: 0,
-                       fontSize: '12px',
-                       color: '#0369a1',
-                       lineHeight: '1.5'
-                     }}>
-                       When you enter an amount, fees and net total are automatically calculated using PayPal's 2.9% + $0.30 fee structure. You can manually adjust fees if needed.
-                     </p>
-                   </div>
+                  <div style={{
+                    background: '#f0f9ff',
+                    border: '1px solid #bae6fd',
+                    borderRadius: '8px',
+                    padding: '16px',
+                    marginBottom: '16px'
+                  }}>
+                    <h4 style={{
+                      margin: '0 0 8px 0',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      color: '#0369a1'
+                    }}>
+                      🤖 Auto-Calculation
+                    </h4>
+                    <p style={{
+                      margin: 0,
+                      fontSize: '12px',
+                      color: '#0369a1',
+                      lineHeight: '1.5'
+                    }}>
+                      When you enter an amount, fees and net total are automatically calculated using PayPal's 2.9% + $0.30 fee structure. You can manually adjust fees if needed.
+                    </p>
+                  </div>
                 </div>
               </div>
 

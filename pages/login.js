@@ -49,7 +49,7 @@ export default function Login() {
         triggerShake();
       }
     } catch (err) {
-      setError('Something went wrong');
+      setError('Login failed. Please try again.');
       triggerShake();
     }
   };

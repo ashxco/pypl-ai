@@ -271,61 +271,7 @@ FORMATTING INSTRUCTIONS:
 
     res.end();
   } catch (error) {
-    console.error('Chat API error:', error);
-    
-    // Handle specific timeout errors
-    if (error.name === 'AbortError') {
-      return res.status(408).json({ 
-        error: 'Request timeout - OpenRouter API is taking too long to respond. Please try again.' 
-      });
-    }
-    
-    // Handle connection errors
-    if (error.cause?.code === 'UND_ERR_CONNECT_TIMEOUT') {
-      return res.status(503).json({ 
-        error: 'Unable to connect to AI service. Please check your internet connection and try again.' 
-      });
-    }
-    
-    // Handle fetch errors with fallback
-    if (error.message.includes('fetch failed')) {
-      console.log('OpenRouter API unavailable, providing fallback response');
-      
-      // Provide a helpful fallback response
-      const fallbackResponse = `I'm currently experiencing connectivity issues with the AI service. However, I can see you're asking about your PayPal business account.
-
-**Your Account Summary:**
-- **Current Balance:** $${userData.balance.toFixed(2)}
-- **Total Sales:** $${userData.totalSales.toFixed(2)}
-- **Total Transactions:** ${userData.totalTransactions}
-- **Average Order Value:** $${userData.avgOrderValue.toFixed(2)}
-
-**Recent Activity (Last 7 Days):**
-- **Transactions:** ${userData.recentWeekActivity.transactions}
-- **Sales:** $${userData.recentWeekActivity.sales.toFixed(2)}
-
-The AI service should be back online shortly. Please try your question again in a few moments for more detailed insights and analysis.`;
-
-      // Return as streaming response format
-      res.setHeader('Content-Type', 'text/event-stream');
-      res.setHeader('Cache-Control', 'no-cache, no-transform');
-      res.setHeader('Connection', 'keep-alive');
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      
-      // Send the fallback response as chunks
-      const chunks = fallbackResponse.split(' ');
-      for (let i = 0; i < chunks.length; i++) {
-        const chunk = chunks[i] + (i < chunks.length - 1 ? ' ' : '');
-        res.write(`data: ${JSON.stringify({ content: chunk })}\n\n`);
-        // Small delay to simulate streaming
-        await new Promise(resolve => setTimeout(resolve, 50));
-      }
-      
-      res.write('data: [DONE]\n\n');
-      res.end();
-      return;
-    }
-    
+    console.error('Error in chat API:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 } 
