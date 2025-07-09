@@ -29,13 +29,14 @@ export default function handler(req, res) {
     if (!username) {
       return res.status(401).json({ error: 'Not authenticated' });
     }
-    const row = db.prepare('SELECT balance, full_name, email FROM users WHERE username = ?').get(username);
+    const row = db.prepare('SELECT balance, full_name, email, business_name FROM users WHERE username = ?').get(username);
     if (!row) {
       return res.status(404).json({ error: 'User not found' });
     }
     return res.status(200).json({ 
       balance: row.balance,
       fullName: row.full_name,
+      businessName: row.business_name,
       email: row.email
     });
   } else {

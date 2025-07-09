@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import styles from '../styles/BalanceCard.module.css';
+import styles from '../styles/TotalBalanceSection.module.css';
 
-export default function BalanceCard() {
+export default function TotalBalanceSection() {
   const [open, setOpen] = useState(false);
   const [balance, setBalance] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,6 +20,7 @@ export default function BalanceCard() {
         setLoading(false);
       })
       .catch((err) => {
+        console.error('Error fetching balance:', err);
         setError('Unable to load balance');
         setLoading(false);
       });
@@ -57,8 +58,10 @@ export default function BalanceCard() {
 
   return (
     <div className={styles.card}>
-      <h1 className={styles.amount}>{displayAmount}</h1>
       <p className={styles.subtitle}>Available balance</p>
+      <div className={styles.topSection}>
+        <h1 className={styles.amount}>{displayAmount}</h1>
+      </div>
       <div className={styles.actions}>
         <button className={styles.manageBtn} ref={buttonRef} onClick={toggle}>
           <span>Manage money</span>
@@ -72,10 +75,6 @@ export default function BalanceCard() {
             <button className={styles.dropdownItem}>View Money page</button>
           </div>
         )}
-        <div className={styles.transferDaily}>
-          <i className="ph ph-arrow-clockwise"></i>
-          <span>Transfers daily</span>
-        </div>
       </div>
     </div>
   );

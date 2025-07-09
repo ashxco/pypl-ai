@@ -16,7 +16,7 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  width: 480px;
+  width: 420px;
   max-height: 80vh;
   overflow: hidden;
   display: flex;
@@ -25,7 +25,7 @@
 }
 
 .header {
-  padding: 24px 24px 16px 24px;
+  padding: 18px 20px 14px 20px;
   border-bottom: 1px solid #e5e5e5;
   display: flex;
   justify-content: space-between;
@@ -33,7 +33,7 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   color: #000;
   margin: 0;
@@ -42,13 +42,13 @@
 .markAllRead {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: none;
   border: none;
   color: #666;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 8px;
   transition: background-color 0.2s ease;
 }
@@ -77,8 +77,8 @@
 
 .notificationItem {
   display: flex;
-  gap: 16px;
-  padding: 20px 24px;
+  gap: 12px;
+  padding: 14px 20px;
   border-bottom: 1px solid #f5f5f5;
   transition: background-color 0.2s ease;
 }
@@ -100,8 +100,8 @@
 }
 
 .notificationIcon {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -110,7 +110,7 @@
 }
 
 .notificationIcon i {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .notificationContent {
@@ -121,12 +121,12 @@
 .notificationMain {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 8px;
+  gap: 8px;
+  margin-bottom: 6px;
 }
 
 .notificationTitle {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
   color: #000;
   margin: 0;
@@ -164,9 +164,9 @@
 }
 
 .notificationDescription {
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   line-height: 1.4;
 }
 
@@ -180,7 +180,7 @@
   background: none;
   border: none;
   color: #002991;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
@@ -193,7 +193,7 @@
 }
 
 .notificationTime {
-  font-size: 14px;
+  font-size: 12px;
   color: #999;
 }
 
@@ -207,7 +207,7 @@
   background: none;
   border: none;
   color: #002991;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
@@ -216,7 +216,7 @@
   gap: 8px;
   justify-content: center;
   width: 100%;
-  padding: 24px 12px;
+  padding: 18px 12px;
   border-radius: 8px;
   transition: background-color 0.2s ease;
 }

@@ -1,0 +1,119 @@
+.tabsContainer {
+  margin-bottom: 0;
+  z-index: 100;
+}
+
+.tabsList {
+  display: flex;
+  gap: 0;
+  background: transparent;
+  border-radius: 8px 8px 0 0;
+  padding: 4px 4px 0 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  z-index: 101;
+}
+
+.tabsList::-webkit-scrollbar {
+  display: none;
+}
+
+.tabButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid #f5f7fa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  z-index: 102;
+  margin-bottom: -2px;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.tabButton:hover {
+  background: rgba(25, 76, 146, 0.02);
+  color: #111827;
+  border: 1px solid transparent;
+  z-index: 103;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.tabButton:focus {
+  outline: none !important;
+  background: rgba(245, 247, 250, 0.7);
+  color: #111827;
+  border: 1px solid #f5f7fa;
+  box-shadow: none !important;
+}
+
+.tabButton:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.tabButton:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.tabButton.active {
+  background: #f5f7fa;
+  color: #111827;
+  box-shadow: none !important;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #f5f7fa;
+  z-index: 104;
+  outline: none !important;
+}
+
+.tabValue {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: inherit;
+}
+
+.tabValue.positive {
+  color: #059669;
+}
+
+.tabLabel {
+  font-size: 12px;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.tabButton.active .tabLabel {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .tabButton {
+    min-width: 120px;
+    padding: 10px 12px;
+  }
+  
+  .tabValue {
+    font-size: 14px;
+  }
+  
+  .tabLabel {
+    font-size: 11px;
+  }
+} 

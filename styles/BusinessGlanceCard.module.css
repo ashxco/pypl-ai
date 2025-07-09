@@ -1,0 +1,213 @@
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: #d0d0d0;
+}
+
+.header {
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.segmentController {
+  display: flex;
+  background: #f8f8f8;
+  border-radius: 20px;
+  padding: 2px;
+  gap: 0;
+}
+
+.segmentButton {
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b6b6b;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: -0.005em;
+}
+
+.segmentButton:hover {
+  color: #2c2c2c;
+}
+
+.segmentButton.active {
+  background: #ffffff;
+  color: #1a1a1a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.listItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.labelContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconCircle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon {
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.label {
+  font-size: 14px;
+  color: #1a1a1a;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+}
+
+.viewMoreContainer {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  justify-content: left;
+}
+
+.viewMoreLink {
+  font-size: 13px;
+  color: #000;
+  text-decoration: underline;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition: color 0.2s ease;
+}
+
+
+.viewMoreLink:hover {
+  color: #0052a3;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 16px;
+  }
+  
+  .header {
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    height: auto;
+    min-height: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .title {
+    font-size: 14px;
+  }
+  
+  .segmentController {
+    align-self: flex-end;
+  }
+  
+  .segmentButton {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  
+  .listItem {
+    padding: 10px 0;
+  }
+  
+  .listItem:last-child {
+    padding-bottom: 0;
+  }
+  
+  .label {
+    font-size: 12px;
+  }
+  
+  .value {
+    font-size: 13px;
+  }
+
+  .viewMoreContainer {
+    padding-top: 12px;
+  }
+
+  .viewMoreLink {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    min-height: auto;
+  }
+  
+  .segmentController {
+    align-self: auto;
+  }
+  
+  .segmentButton {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+} 

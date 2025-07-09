@@ -1,6 +1,9 @@
 .container {
   grid-column: span 12;
-  margin: 12px 0;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0;
+  transition: border-color 0.2s ease;
 }
 
 .header {
@@ -22,6 +25,7 @@
   height: 710px;
   width: 100%;
   transition: opacity 0.2s ease-in-out;
+  margin-top: -1px;
 }
 
 /* Custom cell styling */
@@ -305,12 +309,7 @@
   text-align: right !important;
 }
 
-.gridContainer :global(.ag-header-cell:nth-last-child(-n+3) .ag-header-cell-label),
-.gridContainer :global(.ag-header-cell:nth-last-child(-n+3) .ag-header-group-cell-label) {
-  justify-content: flex-end !important;
-  text-align: right !important;
-  display: flex !important;
-}
+/* Removed automatic right-alignment for last 3 columns - now only explicit rightAligned class applies */
 .gridContainer :global(.ag-header) {
   border-bottom: 1px solid #e0e9fd !important;
 }
@@ -326,13 +325,22 @@
 /* Responsive styles */
 @media (max-width: 768px) {
   .gridContainer {
-    font-size: 12px;
+    margin: 0 8px;
+  }
+  
+  .sectionHeading {
+    padding: 16px 16px 0 16px;
+    margin-bottom: 16px;
+  }
+  
+  .sectionHeading h2 {
+    font-size: 16px;
   }
   
   .gridContainer :global(.ag-theme-alpine) {
     --ag-header-height: 40px;
-    --ag-row-height: 40px;
-    --ag-font-size: 12px;
+    --ag-row-height: 52px;
+    --ag-font-size: 13px;
   }
 
   /* Override the right-alignment rule for mobile - only apply to the last column (Total) */
@@ -505,4 +513,59 @@
 
 .fadeIn {
   opacity: 1;
+}
+
+/* Status Badge Styles */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.statusCompleted {
+  background: #E6FAEE;
+  color: #005243;
+}
+
+.statusPending {
+  background: #FFF3CD;
+  color: #856404;
+}
+
+.statusProcessing {
+  background: #D1ECF1;
+  color: #0C5460;
+}
+
+.statusAwaiting {
+  background: #F3E5F5;
+  color: #4A148C;
+}
+
+.statusActive {
+  background: #E8F5E8;
+  color: #2E7D32;
+}
+
+.statusDefault {
+  background: #F8F9FA;
+  color: #6C757D;
+}
+
+.sectionHeading {
+  padding: 20px 20px 0 20px;
+  margin-bottom: 20px;
+}
+
+.sectionHeading h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  letter-spacing: -0.01em;
 } 

@@ -1,0 +1,160 @@
+.container {
+  width: 100%;
+  margin: 16px 0;
+  padding: 0 32px;
+}
+
+.scrollContainer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.scrollContainer::before,
+.scrollContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.scrollContainer::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 0;
+}
+
+.scrollContainer::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 1;
+}
+
+.scrollContainer.canScrollLeft::before {
+  opacity: 1;
+}
+
+.scrollContainer.canScrollRight::after {
+  opacity: 1;
+}
+
+.scrollContainer:not(.canScrollLeft)::before {
+  opacity: 0;
+}
+
+.scrollContainer:not(.canScrollRight)::after {
+  opacity: 0;
+}
+
+.pillsContainer {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 8px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pillsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.pill {
+  background: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #495057;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.005em;
+  position: relative;
+  background-clip: padding-box;
+}
+
+.pill:not(:hover) {
+  transition: none;
+}
+
+.pill::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 20px;
+  background: linear-gradient(45deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05), rgba(99, 102, 241, 0.05), rgba(59, 130, 246, 0.05));
+  background-size: 200% 200%;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.pill:hover {
+  color: #343a40;
+  transform: translateY(-1px);
+}
+
+.pill:active {
+  transform: translateY(0);
+}
+
+.scrollButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #6c757d;
+  transition: all 0.2s ease;
+  z-index: 15;
+}
+
+.scrollButton:hover {
+  background: #f8f9fa;
+  border-color: #adb5bd;
+  color: #495057;
+}
+
+.scrollButton.left {
+  left: 8px;
+}
+
+.scrollButton.right {
+  right: 8px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+    margin: 12px 0;
+  }
+  
+  .pill {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .scrollButton {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+} 

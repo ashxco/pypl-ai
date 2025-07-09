@@ -12,8 +12,11 @@
     "ag-grid-react": "^33.3.2",
     "better-sqlite3": "latest",
     "next": "latest",
+    "phosphor-react": "^1.4.1",
     "react": "latest",
     "react-dom": "latest",
-    "recharts": "^3.0.0"
+    "react-markdown": "^10.1.0",
+    "recharts": "^3.0.0",
+    "remark-gfm": "^4.0.1"
   }
 }

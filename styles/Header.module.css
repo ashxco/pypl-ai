@@ -51,6 +51,29 @@
   background: #f5f7fa;
 }
 
+/* AI Sparkle Icon Styling */
+.iconBtn:has(i.ph-sparkle) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.iconBtn:has(i.ph-sparkle):hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  color: white;
+}
+
+.iconBtn:has(i.ph-sparkle) i {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
 .notificationBadge {
   position: absolute;
   top: 0px;
