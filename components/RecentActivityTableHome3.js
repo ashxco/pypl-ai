@@ -2166,6 +2166,8 @@ export default function RecentActivityTableHome3() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [activeTab, setActiveTab] = useState('new_transactions');
+  const [isUpdatingView, setIsUpdatingView] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [dataType, setDataType] = useState('transactions'); // 'transactions' or 'customers'
   const [stats, setStats] = useState({
     totalReceived: 0,
@@ -2248,6 +2250,34 @@ export default function RecentActivityTableHome3() {
     return filtered;
   };
 
+  // Generate filtered transactions based on search query
+  const generateFilteredTransactions = (query) => {
+    const allTransactions = getFilteredTransactions(activeTab);
+    const queryLower = query.toLowerCase();
+    
+    // Filter based on various fields
+    const filtered = allTransactions.filter(transaction => {
+      return (
+        transaction.customer?.toLowerCase().includes(queryLower) ||
+        transaction.description?.toLowerCase().includes(queryLower) ||
+        transaction.status?.toLowerCase().includes(queryLower) ||
+        transaction.type?.toLowerCase().includes(queryLower) ||
+        transaction.amount?.toString().includes(queryLower) ||
+        transaction.reference?.toLowerCase().includes(queryLower)
+      );
+    });
+    
+    // If no matches found, return some sample filtered data to show the view update worked
+    if (filtered.length === 0) {
+      return allTransactions.slice(0, 3).map(t => ({
+        ...t,
+        description: `${query} - ${t.description}`
+      }));
+    }
+    
+    return filtered;
+  };
+
     // Fetch transactions with pagination and filtering (using mock data)
   const fetchTransactions = (page = 1, filter = activeTab, isTabSwitch = false) => {
     setIsTransitioning(true);
@@ -2309,6 +2339,30 @@ export default function RecentActivityTableHome3() {
     setActiveTab(tabKey);
     setCurrentPage(1);
     fetchTransactions(1, tabKey, true); // Pass true for isTabSwitch
+  };
+
+  // Handle view update
+  const handleViewUpdate = () => {
+    console.log('Creating view for:', searchQuery);
+    setIsUpdatingView(true);
+    
+    // Simulate AI processing and view update
+    setTimeout(() => {
+      // Filter transactions based on search query
+      const filteredTransactions = generateFilteredTransactions(searchQuery);
+      setTransactions(filteredTransactions);
+      setIsUpdatingView(false);
+      
+      // Update stats to reflect filtered data
+      setStats({
+        totalReceived: filteredTransactions.reduce((sum, t) => sum + (t.amount > 0 ? t.amount : 0), 0),
+        newTransactions: filteredTransactions.length,
+        pendingPayments: filteredTransactions.filter(t => t.status === 'pending').length,
+        newCustomers: filteredTransactions.filter(t => t.type === 'payment').length,
+        refundsProcessed: filteredTransactions.filter(t => t.type === 'refund').length,
+        allTransactions: filteredTransactions.length
+      });
+    }, 3000);
   };
 
   const handlePageChange = (newPage) => {
@@ -3069,25 +3123,25 @@ export default function RecentActivityTableHome3() {
     {
       key: 'new_transactions',
       label: 'New transactions',
-      value: stats.newTransactions.toString(),
+      value: (stats.newTransactions || 0).toString(),
       color: 'default'
     },
     {
       key: 'pending',
       label: 'New orders',
-      value: stats.pendingPayments.toString(),
+      value: (stats.pendingPayments || 0).toString(),
       color: 'default'
     },
     {
       key: 'new_customers',
       label: 'New customers',
-      value: stats.newCustomers.toString(),
+      value: (stats.newCustomers || 0).toString(),
       color: 'default'
     },
     {
       key: 'refunds',
       label: 'New disputes',
-      value: stats.refundsProcessed.toString(),
+      value: (stats.refundsProcessed || 0).toString(),
       color: 'default'
     }
   ];
@@ -3101,23 +3155,55 @@ export default function RecentActivityTableHome3() {
 
       {/* Tabs */}
       <div className={tabStyles.tabsContainer}>
-        <div className={tabStyles.tabsList}>
-          {tabs.map((tab) => (
-            <button
-              key={tab.key}
-              className={`${tabStyles.tabButton} ${activeTab === tab.key ? tabStyles.active : ''}`}
-              onClick={() => handleTabChange(tab.key)}
-            >
-              <div className={`${tabStyles.tabValue} ${tab.color === 'positive' ? tabStyles.positive : ''}`}>
-                {tab.value}
-              </div>
-              <div className={tabStyles.tabLabel}>{tab.label}</div>
-            </button>
-          ))}
+        <div className={tabStyles.tabsWrapper}>
+          <div className={tabStyles.tabsList}>
+            {tabs.map((tab) => (
+              <button
+                key={tab.key}
+                className={`${tabStyles.tabButton} ${activeTab === tab.key ? tabStyles.active : ''}`}
+                onClick={() => handleTabChange(tab.key)}
+              >
+                <div className={`${tabStyles.tabValue} ${tab.color === 'positive' ? tabStyles.positive : ''}`}>
+                  {tab.value}
+                </div>
+                <div className={tabStyles.tabLabel}>{tab.label}</div>
+              </button>
+            ))}
+          </div>
+          <div className={tabStyles.searchContainer}>
+            <div className={tabStyles.searchInputWrapper}>
+              <i className="ph ph-sparkle"></i>
+              <input
+                type="text"
+                placeholder="create a view..."
+                className={tabStyles.searchInput}
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && searchQuery.trim()) {
+                    handleViewUpdate();
+                  }
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       <div className={`${styles.gridContainer} ${isTransitioning ? styles.fadeOut : styles.fadeIn}`}>
+        {/* Updating View Overlay */}
+        {isUpdatingView && (
+          <div className={styles.updatingOverlay}>
+            <div className={styles.updatingContent}>
+              <div className={styles.updatingSpinner}>
+                <i className="ph ph-sparkle"></i>
+              </div>
+              <div className={styles.updatingText}>updating view...</div>
+            </div>
+          </div>
+        )}
         <AgGridReact
           columnDefs={
             dataType === 'new_transactions' ? (

@@ -2,10 +2,13 @@ import styles from '../styles/QuickCard.module.css';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 
-export default function QuickCard({ icon, title, desc }) {
+export default function QuickCard({ icon, title, desc, onChatActivate }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const menuButtonRef = useRef(null);
+
+  // Check if this is a dispute card
+  const isDisputeCard = title.toLowerCase().includes('dispute');
 
   // Extract main action from title (e.g., "Review 2 disputes" -> "Go to disputes")
   const getMainAction = (title) => {
@@ -51,6 +54,14 @@ export default function QuickCard({ icon, title, desc }) {
     setShowDropdown(false);
   };
 
+  const handleBadgeClick = () => {
+    console.log('Resolve with AI badge clicked');
+    if (onChatActivate) {
+      // Open the AI chat panel
+      onChatActivate();
+    }
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.topRow}>
@@ -75,6 +86,13 @@ export default function QuickCard({ icon, title, desc }) {
       </div>
       <Link href="#" className={styles.link}>{title}</Link>
       <p className={styles.desc}>{desc}</p>
+      
+      {isDisputeCard && (
+        <div className={styles.badge} onClick={handleBadgeClick}>
+          <i className={`ph ph-sparkle ${styles.badgeIcon}`}></i>
+          <span className={styles.badgeText}>Resolve with AI</span>
+        </div>
+      )}
     </div>
   );
 } 

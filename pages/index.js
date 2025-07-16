@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import BalanceCard from '../components/BalanceCard';
@@ -9,6 +9,7 @@ import AnalyticsWrapper from '../components/AnalyticsWrapper';
 import PromoBanner from '../components/PromoBanner';
 import RecentActivityTable from '../components/RecentActivityTable';
 import ScrollableSection from '../components/ScrollableSection';
+import DisputeAssistant from '../components/DisputeAssistant';
 import Footer from '../components/Footer';
 import styles from '../styles/Main.module.css';
 import Head from 'next/head';
@@ -19,6 +20,8 @@ export default function Home() {
   const [cookieUser, setCookieUser] = useState('');
   const [collapsed, setCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showDisputeAssistant, setShowDisputeAssistant] = useState(false);
+  const disputeButtonRef = useRef(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -61,6 +64,14 @@ export default function Home() {
     setCollapsed(true);
   };
 
+  const handleChatActivate = () => {
+    setShowDisputeAssistant(true);
+  };
+
+  const handleChatClose = () => {
+    setShowDisputeAssistant(false);
+  };
+
   return (
     <div style={{ height: '100vh' }}>
       <Head>
@@ -85,10 +96,9 @@ export default function Home() {
           <div className={styles.container}>
             <BalanceCard />
             <ScrollableSection itemWidth={290}>
-              <QuickCard icon="tray" title="Review 2 disputes" desc="Responding quickly helps you and your customers." />
-              <QuickCard icon="truck" title="Ship 2 new order" desc="Print labels and schedule pick up for your new orders." />
-              <QuickCard icon="user" title="Review 5 inquiries" desc="5 customers inquired about custom orders for Christmas." />
-              <QuickCard icon="hand-coins" title="Finalize your loan application" desc="Finish the last few steps now to get as fast, flexible loan." />
+              <QuickCard icon="tray" title="Review 2 disputes" desc="Two customers have disputed transactions totaling $149.98 - respond within 7 days." onChatActivate={handleChatActivate} />
+              <QuickCard icon="truck" title="Ship 2 new order" desc="Print labels and schedule pick up for your new orders." onChatActivate={handleChatActivate} />
+              <QuickCard icon="hand-coins" title="Finalize your loan application" desc="Finish the last few steps now to get as fast, flexible loan." onChatActivate={handleChatActivate} />
             </ScrollableSection>
             <QuickAccessWrapper />
             <AnalyticsWrapper />
@@ -98,6 +108,11 @@ export default function Home() {
           <Footer />
         </main>
       </div>
+      <DisputeAssistant 
+        isOpen={showDisputeAssistant} 
+        onClose={handleChatClose}
+        buttonRef={disputeButtonRef}
+      />
     </div>
   );
 } 
