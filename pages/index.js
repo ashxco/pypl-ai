@@ -7,7 +7,7 @@ import QuickCard from '../components/QuickCard';
 import QuickAccessWrapper from '../components/QuickAccessWrapper';
 import AnalyticsWrapper from '../components/AnalyticsWrapper';
 import PromoBanner from '../components/PromoBanner';
-import RecentActivityTable from '../components/RecentActivityTable';
+import RecentActivityTableHome3 from '../components/RecentActivityTableHome3';
 import ScrollableSection from '../components/ScrollableSection';
 import DisputeAssistant from '../components/DisputeAssistant';
 import Footer from '../components/Footer';
@@ -96,14 +96,15 @@ export default function Home() {
           <div className={styles.container}>
             <BalanceCard />
             <ScrollableSection itemWidth={290}>
-              <QuickCard icon="tray" title="Review 2 disputes" desc="Two customers have disputed transactions totaling $149.98 - respond within 7 days." onChatActivate={handleChatActivate} />
+              <QuickCard icon="tray" title="Review 2 disputes" desc="Responding quickly helps you and your customers." onChatActivate={handleChatActivate} />
               <QuickCard icon="truck" title="Ship 2 new order" desc="Print labels and schedule pick up for your new orders." onChatActivate={handleChatActivate} />
+              <QuickCard icon="user" title="Review 5 inquiries" desc="5 customers inquired about custom orders for Christmas." onChatActivate={handleChatActivate} />
               <QuickCard icon="hand-coins" title="Finalize your loan application" desc="Finish the last few steps now to get as fast, flexible loan." onChatActivate={handleChatActivate} />
             </ScrollableSection>
             <QuickAccessWrapper />
             <AnalyticsWrapper />
             <PromoBanner />
-            <RecentActivityTable />
+            <RecentActivityTableHome3 />
           </div>
           <Footer />
         </main>

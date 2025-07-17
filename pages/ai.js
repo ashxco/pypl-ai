@@ -15,7 +15,7 @@ import AnalyticsWrapperHome3 from '../components/AnalyticsWrapperHome3';
 import SinceLoginCard from '../components/SinceLoginCard';
 import BusinessGlanceCard from '../components/BusinessGlanceCard';
 
-export default function Home3() {
+export default function AiAssistant() {
   const router = useRouter();
   const { user } = router.query;
   const [cookieUser, setCookieUser] = useState('');
@@ -92,7 +92,7 @@ export default function Home3() {
   return (
     <div style={{ height: '100vh' }}>
       <Head>
-        <title>PayPal | Home3</title>
+        <title>PayPal | AI Assistant</title>
       </Head>
       <Sidebar 
         username={displayUser} 

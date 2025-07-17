@@ -389,10 +389,10 @@ export default function DisputeAssistant({ isOpen, onClose, buttonRef }) {
           <div className={styles.header}>
             <div className={styles.headerLeft}>
               <div className={styles.aiIcon}>
-                <i className="ph ph-scales"></i>
+                <i className="ph ph-sparkle"></i>
               </div>
               <div className={styles.headerText}>
-                <h3 className={styles.title}>Dispute Assistant</h3>
+                <h3 className={styles.title}>PayPal Assistant</h3>
                 <span className={styles.status}>Ready to Help</span>
               </div>
             </div>
@@ -406,7 +406,7 @@ export default function DisputeAssistant({ isOpen, onClose, buttonRef }) {
               <div key={msg.id} className={`${styles.message} ${styles[msg.type]}`}>
                 {msg.type === 'ai' && (
                   <div className={styles.messageAvatar}>
-                    <i className="ph ph-scales"></i>
+                    <i className="ph ph-sparkle"></i>
                   </div>
                 )}
                 <div className={styles.messageContent}>

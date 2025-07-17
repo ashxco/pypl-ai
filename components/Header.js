@@ -16,8 +16,10 @@ export default function Header({ toggleSidebar }) {
   const avatarRef = useRef(null);
   const aiSparkleRef = useRef(null);
 
-  // Check if we're on the home3 page
-  const isHome3Page = router.pathname === '/home3';
+  // Check if we're on the AI page or main page
+  const isAiPage = router.pathname === '/ai';
+  const isMainPage = router.pathname === '/';
+  const showAiFeatures = isAiPage || isMainPage;
 
   // Fetch user data when component mounts
   useEffect(() => {
@@ -84,7 +86,7 @@ export default function Header({ toggleSidebar }) {
           <span className={styles.business}>{businessName}</span>
         </div>
         <div className={styles.right}>
-          {isHome3Page && (
+          {showAiFeatures && (
             <button className={styles.iconBtn} ref={aiSparkleRef} onClick={handleAiSparkleClick}>
               <i className="ph ph-sparkle"></i>
             </button>
@@ -113,7 +115,7 @@ export default function Header({ toggleSidebar }) {
         buttonRef={avatarRef}
         userData={userData}
       />
-      {isHome3Page && (
+      {showAiFeatures && (
         <AiChatPanel 
           isOpen={showAiChat} 
           onClose={handleCloseAiChat}

@@ -3200,7 +3200,7 @@ export default function RecentActivityTableHome3() {
               <div className={styles.updatingSpinner}>
                 <i className="ph ph-sparkle"></i>
               </div>
-              <div className={styles.updatingText}>updating view...</div>
+              <div className={styles.updatingText}>Updating your transactions...</div>
             </div>
           </div>
         )}
